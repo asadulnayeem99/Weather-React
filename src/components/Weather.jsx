@@ -11,18 +11,18 @@ import { useState } from "react";
 const Weather = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [text, setText] = useState("");
-  const [cityName, setCityName] = useState("");
-  const [Humidity, setHumidity] = useState("");
-  const [windSpeed, setWindSpeed] = useState("");
+  const [cityName, setCityName] = useState("Enter City Name");
+  const [Humidity, setHumidity] = useState("0");
+  const [windSpeed, setWindSpeed] = useState("0");
   const [condition, setCondition] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState("../../public/assets/react.svg");
 
   const weatherIcons = {
-    Clear: "../assets/clear.png",
-    Clouds: "../assets/cloud.png",
-    Rain: "../assets/rain.png",
-    Snow: "../assets/snow.png",
-    Drizzle: "../assets/drizzle.png",
+    Clear: "../../public/assets/image/clear.png",
+    Clouds: "../../public/assets/image/cloud.png",
+    Rain: "../../public/assets/image/rain.png",
+    Snow: "../../public/assets/image/snow.png",
+    Drizzle: "../../public/assets/image/drizzle.png",
     // Add more weather conditions and corresponding image URLs as needed
   };
 
@@ -50,21 +50,12 @@ const Weather = () => {
         setWindSpeed(data.wind.speed);
         console.log(data.weather[0].main);
         setCondition(data.weather[0].main);
-        // if (condition === "Clear") {
-        //   setImage("../assets/clear.png");
-        // }
         getWeatherIcon(condition);
         console.log(condition, "after");
       });
   };
 
   const getWeatherIcon = (condition) => {
-    const text = `"${condition}"`;
-    console.log(text);
-    console.log(weatherIcons[text]);
-    // console.log(`"${condition}"`);
-    // console.log(condition);
-    // Check if the weather condition exists in the weatherIcons object
     if (weatherIcons.hasOwnProperty(condition)) {
       console.log(weatherIcons[condition]);
       let i = weatherIcons[condition];
@@ -77,8 +68,8 @@ const Weather = () => {
   };
 
   return (
-    <div className="h-[400px] p-2 m-auto rounded-2xl w-[300px] bg-blue-900">
-      <div className="flex flex-row gap-3 justify-center ">
+    <div className="h-[400px] mt-5 p-2 m-auto rounded-2xl w-[300px] bg-blue-900">
+      <div className="flex mt-2 p-3 flex-row gap-3 justify-center ">
         <div>
           <input
             className="rounded-2xl p-3 text-[15px] text-blue h-8"
@@ -89,18 +80,14 @@ const Weather = () => {
         </div>
         <div
           onClick={fetchWeather}
-          className="h-8 w-8 rounded-full bg-white flex justify-center items-center"
+          className="h-8 w-8 rounded-full cursor-pointer bg-white flex justify-center items-center"
         >
           <FontAwesomeIcon className="text-[10px]" icon={faMagnifyingGlass} />
         </div>
       </div>
       <div className="flex flex-col justify-center items-center">
         <div>
-          <img
-            className="w-[120px] mt-8 h-[120px]"
-            src="../assets/cloud.png"
-            alt=""
-          />
+          <img className="w-[120px] mt-8 h-[120px]" src={image} alt="" />
         </div>
         <div className="text-[50px] text-white">
           <span>{weatherData}</span> &deg;C
@@ -134,11 +121,6 @@ const Weather = () => {
           </div>
         </div>
       </div>
-      <img
-        className="bg-gray-700"
-        src="../assets/image/cloud.png"
-        alt="image"
-      />
     </div>
   );
 };
