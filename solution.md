@@ -1,0 +1,3 @@
+# problems 
+file path started from the public directory and always use the public direcotry as the share file path like image or any other public assets...
+show the vite docs for more info [vite config](https://vitejs.dev/config/)
